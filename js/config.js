@@ -17,7 +17,7 @@ const RESORT_CONFIG = {
 
   // ---------- Identity ----------
   brandName: "Vana Mist Resort",
-  shortName: "Vana Mist",
+  shortName: "Vana Misty",
   logoInitial: "V",
   tagline: "Where the Mist Meets the Forest Canopy",
   locationShort: "Wayanad, Kerala",
