@@ -1,49 +1,47 @@
+/* Colour defaults (RGB channels so Tailwind opacity classes work).
+   config.js `theme` overrides these at load via js/theme.js. */
 :root {
-  --color-forest: #163024;
-  --color-forest-light: #234736;
-  --color-gold: #C88A55;
-  --color-gold-hover: #B57743;
-  --color-alabaster: #FAF8F5;
-  --color-sand: #F1EDE6;
+  --c-alabaster: 250 248 245;
+  --c-sand: 241 237 230;
+  --c-forest: 22 48 36;
+  --c-forest-light: 35 71 54;
+  --c-gold: 200 138 85;
+  --c-gold-hover: 181 119 67;
+  --c-charcoal: 28 28 28;
+  --c-bronze: 152 105 65;       /* gold darkened for white text (contrast >= 4.5) */
+  --c-bronze-hover: 134 92 57;
 }
 
-/* Slow Ken Burns Hero Zoom */
+/* Slow Ken Burns hero zoom */
 @keyframes kenBurnsZoom {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.12);
-  }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
 }
+.ken-burns { animation: kenBurnsZoom 18s ease-in-out infinite alternate; }
 
-.ken-burns {
-  animation: kenBurnsZoom 18s ease-in-out infinite alternate;
-}
-
-/* Navbar Scrolled State */
+/* Navbar scrolled state (home page overlay header) */
 .navbar-scrolled {
-  background-color: rgba(22, 48, 36, 0.95);
+  background-color: rgb(var(--c-forest) / 0.95);
   backdrop-filter: blur(12px);
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
-/* Smooth Scroll Reveal Animation */
-.reveal {
+/* Scroll reveal: only hidden when JS is running (content never stays invisible if JS fails) */
+.js .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.js .reveal.active { opacity: 1; transform: translateY(0); }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Visible keyboard focus */
+:focus-visible { outline: 2px solid rgb(var(--c-gold)); outline-offset: 2px; }
 
-/* Mobile Menu Drawer Transition */
-#mobileMenu {
-  transition: max-height 0.35s ease, opacity 0.3s ease;
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto !important; }
 }

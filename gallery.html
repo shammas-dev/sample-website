@@ -1,207 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-page="gallery">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gallery | Vana Mist Resort Wayanad</title>
+    <meta name="description" content="Photos of the villas, pool, dining and spa at Vana Mist Resort, Wayanad." />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        alabaster: '#FAF8F5',
-                        sand: '#F1EDE6',
-                        forest: '#163024',
-                        forestLight: '#234736',
-                        gold: '#C88A55',
-                        goldHover: '#B57743',
-                        charcoal: '#1C1C1C',
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <!-- STYLES (development mode: Tailwind CDN). For production run `npm run build:css`, then replace the
+         next two <script> lines with:  <link rel="stylesheet" href="css/tailwind.css" /> -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Config + theme run here so colours are correct before first paint -->
+    <script src="js/config.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/theme.js"></script>
+</head>
 <body class="bg-alabaster text-charcoal font-sans antialiased">
 
-    <!-- NAVBAR -->
-    <header class="sticky top-0 z-50 bg-forest/95 backdrop-blur-md py-4 px-5 md:px-12 text-white shadow-md">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <span
-                    class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-white font-serif font-bold text-lg">V</span>
-                <span class="font-serif text-2xl md:text-3xl font-semibold tracking-wide">Vana Mist</span>
-            </a>
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="index.html" class="hover:text-gold transition">Home</a>
-                <a href="rooms.html" class="hover:text-gold transition">Rooms & Tariffs</a>
-                <a href="gallery.html" class="text-gold font-semibold">Gallery</a>
-                <a href="contact.html" class="hover:text-gold transition">Packages & Contact</a>
-            </nav>
-            <a href="index.html#booking-dock"
-                class="bg-gold hover:bg-goldHover text-white text-sm font-semibold px-5 py-2.5 rounded-full transition">
-                Book Direct
-            </a>
-        </div>
-    </header>
+    <div id="site-header" data-variant="solid"></div>
 
-    <!-- HEADER + FILTER TABS -->
     <section class="bg-forest text-alabaster pt-16 pb-12 px-5 md:px-12 text-center">
-        <span class="text-gold text-xs font-bold uppercase tracking-widest">Visual Tour</span>
-        <h1 class="font-serif text-4xl md:text-6xl font-semibold mt-2">Life Above the Clouds</h1>
-
-        <!-- Filter Pills -->
-        <div class="flex flex-wrap justify-center gap-3 mt-8" id="galleryFilters">
-            <button data-filter="all"
-                class="filter-btn active bg-gold text-white text-xs md:text-sm font-semibold px-5 py-2 rounded-full transition cursor-pointer">All
-                Photos</button>
-            <button data-filter="villas"
-                class="filter-btn bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-medium px-5 py-2 rounded-full transition cursor-pointer">Villas
-                & Suites</button>
-            <button data-filter="pool"
-                class="filter-btn bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-medium px-5 py-2 rounded-full transition cursor-pointer">Pool
-                & Estate</button>
-            <button data-filter="dining"
-                class="filter-btn bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-medium px-5 py-2 rounded-full transition cursor-pointer">Dining
-                & Spa</button>
-        </div>
+        <span data-cfg="pages.gallery.eyebrow" class="text-gold text-xs font-bold uppercase tracking-widest"></span>
+        <h1 data-cfg="pages.gallery.heading" class="font-serif text-4xl md:text-6xl font-semibold mt-2"></h1>
+        <div id="galleryFilters" class="flex flex-wrap justify-center gap-3 mt-8"></div>
     </section>
 
-    <!-- GALLERY GRID -->
-    <main class="max-w-7xl mx-auto py-14 px-5 md:px-12">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="pool" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"
-                    alt="Infinity Edge Pool"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Main Infinity Pool at Dusk</p>
-                </div>
-            </div>
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="villas" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80"
-                    alt="Mist Valley Cottage Interior"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Mist Valley Cottage Suite</p>
-                </div>
-            </div>
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="dining" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80"
-                    alt="Candlelight Dinner"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Private Gazebo Dining</p>
-                </div>
-            </div>
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="villas" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80"
-                    alt="Plunge Pool Suite"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Private Plunge Pool Villa</p>
-                </div>
-            </div>
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="pool" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=900&q=80"
-                    alt="Estate Lounge Deck"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Morning Tea Deck</p>
-                </div>
-            </div>
-
-            <div class="gallery-item group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-sm"
-                data-category="dining" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80"
-                    alt="Ayurveda Wellness Spa"
-                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-end p-5 text-white">
-                    <p class="font-serif text-xl">Traditional Ayurveda Sanctuary</p>
-                </div>
-            </div>
-
-        </div>
+    <main id="main" class="max-w-7xl mx-auto py-14 px-5 md:px-12">
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
-    <!-- FULLSCREEN LIGHTBOX MODAL -->
-    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4"
-        onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white text-3xl font-light cursor-pointer">&times;</button>
-        <div class="max-w-4xl w-full text-center" onclick="event.stopPropagation()">
+    <!-- Fullscreen lightbox: Esc closes, arrow keys / buttons / swipe change photo -->
+    <div id="lightboxModal" class="fixed inset-0 z-[60] bg-black/90 hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button type="button" id="lightboxClose" data-lightbox-close class="absolute top-4 right-4 w-12 h-12 text-white text-4xl font-light cursor-pointer" aria-label="Close photo">&times;</button>
+        <button type="button" data-lightbox-prev class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 text-white text-4xl cursor-pointer" aria-label="Previous photo">&#8249;</button>
+        <button type="button" data-lightbox-next class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 text-white text-4xl cursor-pointer" aria-label="Next photo">&#8250;</button>
+        <figure class="max-w-4xl w-full text-center">
             <img id="lightboxImg" src="" alt="" class="max-h-[80vh] mx-auto rounded-2xl shadow-2xl" />
-            <p id="lightboxCaption" class="text-white font-serif text-2xl mt-4"></p>
-        </div>
+            <figcaption id="lightboxCaption" class="text-white font-serif text-2xl mt-4"></figcaption>
+        </figure>
     </div>
 
-    <footer class="bg-forest text-alabaster py-8 px-5 text-center text-xs text-white/60">
-        <p>© 2026 Vana Mist Resort, Wayanad • Direct Booking Engine</p>
-    </footer>
+    <div id="site-footer"></div>
+    <div id="site-floating"></div>
 
-    <!-- ================= FLOATING MAP & WHATSAPP BUTTONS ================= -->
-    <div class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-50 flex flex-col gap-3">
-
-        <!-- Google Maps Direction Button -->
-        <a id="floatingMapBtn" href="https://maps.google.com/?q=Wayanad,Kerala" target="_blank"
-            rel="noopener noreferrer" aria-label="Open Resort Location on Google Maps"
-            class="group relative w-12 h-12 rounded-full bg-forest text-white shadow-2xl border-2 border-gold/60 flex items-center justify-center hover:bg-forestLight hover:scale-110 transition-all duration-300">
-            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
-            </svg>
-            <span
-                class="hidden md:block absolute right-14 bg-charcoal text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow">
-                View Route Map
-            </span>
-        </a>
-
-        <!-- Direct WhatsApp Chat Button (100% Reliable Direct Link) -->
-        <a id="floatingWhatsappBtn"
-            href="https://wa.me/918606411892?text=Hi%20Vana%20Mist%20Resort!%20I%20have%20a%20query." target="_blank"
-            rel="noopener noreferrer" aria-label="Chat on WhatsApp"
-            class="group relative w-12 h-12 rounded-full bg-[#25D366] text-white shadow-xl flex items-center justify-center hover:scale-110 transition-all duration-300">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path
-                    d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.49 0 .16 5.32.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 005.74 1.46h.01c6.58 0 11.92-5.33 11.92-11.9a11.83 11.83 0 00-3.48-8.42zM12.08 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 01-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.9 7c0 5.45-4.44 9.9-9.88 9.9zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z" />
-            </svg>
-            <span
-                class="hidden md:block absolute right-14 bg-charcoal text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow">
-                Chat on WhatsApp
-            </span>
-        </a>
-
-    </div>
-
-    <script src="js/config.js"></script>
+    <script src="js/components.js"></script>
     <script src="js/script.js"></script>
 </body>
 

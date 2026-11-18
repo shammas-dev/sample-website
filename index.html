@@ -1,132 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-page="home">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vana Mist Resort | Luxury Nature Stays in Wayanad</title>
-    <meta name="description"
-        content="Book direct at Vana Mist Resort, Wayanad. Stays starting from ₹4,999/night with zero booking fees." />
+    <meta name="description" content="Book direct at Vana Mist Resort, Wayanad. Private villas and cottages with zero booking fees." />
 
-    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        alabaster: '#FAF8F5',
-                        sand: '#F1EDE6',
-                        forest: '#163024',
-                        forestLight: '#234736',
-                        gold: '#C88A55',
-                        goldHover: '#B57743',
-                        charcoal: '#1C1C1C',
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-
-    <!-- Flatpickr Date Picker -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-
-    <!-- Custom CSS -->
+    <!-- STYLES (development mode: Tailwind CDN). For production run `npm run build:css`, then replace the
+         next two <script> lines with:  <link rel="stylesheet" href="css/tailwind.css" /> -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Config + theme run here so colours are correct before first paint -->
+    <script src="js/config.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/theme.js"></script>
 </head>
 
 <body class="bg-alabaster text-charcoal font-sans antialiased selection:bg-forest selection:text-alabaster">
 
-    <!-- ================= NAVBAR ================= -->
-    <header id="navbar"
-        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-5 md:px-12 text-white">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="index.html" class="flex items-center gap-2 group">
-                <span data-logo-initial
-                    class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-white font-serif font-bold text-lg">V</span>
-                <span data-short-name class="font-serif text-2xl md:text-3xl font-semibold tracking-wide">Vana
-                    Mist</span>
-            </a>
+    <div id="site-header" data-variant="overlay"></div>
 
-            <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-                <a href="index.html" class="text-gold font-semibold">Home</a>
-                <a href="rooms.html" class="hover:text-gold transition">Rooms & Tariffs</a>
-                <a href="gallery.html" class="hover:text-gold transition">Gallery</a>
-                <a href="contact.html" class="hover:text-gold transition">Packages & Contact</a>
-            </nav>
-
-            <!-- Right Actions + Mobile Hamburger -->
-            <div class="flex items-center gap-3">
-                <span
-                    class="hidden lg:inline-flex items-center gap-1.5 text-xs bg-white/15 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Direct Rate Guarantee
-                </span>
-                <a href="#booking-dock"
-                    class="bg-gold hover:bg-goldHover text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full transition shadow-lg">
-                    Check Rates
-                </a>
-                <!-- Mobile Hamburger Button -->
-                <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
-                    class="md:hidden text-white p-1.5 focus:outline-none cursor-pointer" aria-label="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobileMenu"
-            class="hidden md:hidden bg-forest/95 backdrop-blur-lg border-t border-white/10 mt-3 rounded-2xl px-5 py-4 space-y-3 text-sm font-medium shadow-xl">
-            <a href="index.html" class="block py-1.5 text-gold font-semibold">Home</a>
-            <a href="rooms.html" class="block py-1.5 hover:text-gold transition">Rooms & Tariffs</a>
-            <a href="gallery.html" class="block py-1.5 hover:text-gold transition">Gallery</a>
-            <a href="contact.html" class="block py-1.5 hover:text-gold transition">Packages & Contact</a>
-        </div>
-    </header>
-
-    <!-- ================= HERO SECTION (RATE FIRST + BOOKING FLOW) ================= -->
-    <section class="relative min-h-screen flex flex-col justify-between pt-28 pb-10 px-5 md:px-12 overflow-hidden">
-        <!-- Background Image with Ken Burns Slow Zoom -->
+    <main id="main">
+    <!-- HERO + BOOKING DOCK -->
+    <section class="relative min-h-[100svh] flex flex-col justify-between pt-28 pb-10 px-5 md:px-12 overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=2000&q=80"
-                alt="Vana Mist Luxury Infinity Pool" class="w-full h-full object-cover ken-burns" />
+            <img data-cfg-src="hero.image" data-w="2000" data-cfg-alt="hero.imageAlt" src="" alt="" fetchpriority="high" class="w-full h-full object-cover ken-burns" />
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-forest/95"></div>
         </div>
 
-        <!-- Hero Center Content -->
         <div class="relative z-10 max-w-4xl mx-auto text-center text-white my-auto pt-6 reveal">
-            <!-- Instant Starting Price Pill -->
-            <div
-                class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/25 px-4 py-1.5 rounded-full text-xs md:text-sm font-medium mb-6">
-                <span class="text-gold font-bold">★ 4.9</span>
-                <span>•</span>
-                <span>Stays from <strong data-starting-price class="text-white">₹4,999</strong><strong> / night</strong>
-                    (Incl. Breakfast)</span>
-            </div>
-
-            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.08] tracking-tight mb-5">
-                Where the Mist Meets <br class="hidden sm:block" /> the Forest Canopy
-            </h1>
-            <p class="text-white/85 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-                Private pool villas and heritage cottages nestled in the misty hills of Wayanad. Check live tariffs
-                below and book directly with zero commission.
-            </p>
+            <div id="heroPill"></div>
+            <h1 data-cfg="hero.headline" class="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.08] tracking-tight mb-5 text-balance"></h1>
+            <p data-cfg="hero.subtext" class="text-white/85 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"></p>
         </div>
 
         <!-- SMART LIVE RATE & WHATSAPP BOOKING DOCK -->
@@ -157,66 +70,60 @@
                             class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">Select
                             Stay</label>
                         <select id="roomType"
-                            class="w-full bg-sand/70 border border-gray-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-charcoal focus:outline-none focus:border-forest">
-                            <option value="4999" data-name="Mist Valley Cottage">Mist Valley Cottage — ₹4,999/nt
-                            </option>
-                            <option value="7499" data-name="Forest Canopy Villa">Forest Canopy Villa — ₹7,499/nt
-                            </option>
-                            <option value="10999" data-name="Plunge Pool Suite">Plunge Pool Suite — ₹10,999/nt</option>
-                        </select>
+                            class="w-full bg-sand/70 border border-gray-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-charcoal focus:outline-none focus:border-forest"></select>
                     </div>
 
                     <!-- Guests & Rooms Inline Stepper (3 cols on desktop) -->
                     <div class="sm:col-span-2 lg:col-span-3">
                         <label class="block text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-1.5">Guests
                             & Rooms</label>
-                        <div class="grid grid-cols-3 gap-1.5">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
                             <!-- Adults -->
                             <div
-                                class="bg-sand/70 border border-gray-200 rounded-xl px-1.5 py-1.5 flex flex-col items-center justify-center">
+                                class="bg-sand/70 border border-gray-200 rounded-xl px-3 sm:px-1.5 py-1.5 flex flex-row sm:flex-col items-center justify-between sm:justify-center">
                                 <span
-                                    class="text-[9px] font-bold uppercase tracking-wide text-gray-500 mb-0.5">Adults</span>
-                                <div class="flex items-center gap-1">
+                                    class="text-xs sm:text-[10px] font-bold uppercase tracking-wide text-gray-600 sm:mb-0.5">Adults</span>
+                                <div class="flex items-center gap-2 lg:gap-1">
                                     <button type="button" onclick="updateCount('adults', -1)"
                                         aria-label="Decrease adults"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
                                     <span id="adultCount"
-                                        class="w-4 text-center text-xs font-bold text-charcoal tabular-nums">2</span>
+                                        class="w-6 lg:w-4 text-center text-base lg:text-xs font-bold text-charcoal tabular-nums">2</span>
                                     <button type="button" onclick="updateCount('adults', 1)"
                                         aria-label="Increase adults"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
                                 </div>
                             </div>
 
                             <!-- Kids -->
                             <div
-                                class="bg-sand/70 border border-gray-200 rounded-xl px-1.5 py-1.5 flex flex-col items-center justify-center">
+                                class="bg-sand/70 border border-gray-200 rounded-xl px-3 sm:px-1.5 py-1.5 flex flex-row sm:flex-col items-center justify-between sm:justify-center">
                                 <span
-                                    class="text-[9px] font-bold uppercase tracking-wide text-gray-500 mb-0.5">Kids</span>
-                                <div class="flex items-center gap-1">
+                                    class="text-xs sm:text-[10px] font-bold uppercase tracking-wide text-gray-600 sm:mb-0.5">Kids</span>
+                                <div class="flex items-center gap-2 lg:gap-1">
                                     <button type="button" onclick="updateCount('children', -1)"
                                         aria-label="Decrease kids"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
                                     <span id="childCount"
-                                        class="w-4 text-center text-xs font-bold text-charcoal tabular-nums">0</span>
+                                        class="w-6 lg:w-4 text-center text-base lg:text-xs font-bold text-charcoal tabular-nums">0</span>
                                     <button type="button" onclick="updateCount('children', 1)"
                                         aria-label="Increase kids"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
                                 </div>
                             </div>
 
                             <!-- Rooms -->
                             <div
-                                class="bg-sand/70 border border-gray-200 rounded-xl px-1.5 py-1.5 flex flex-col items-center justify-center">
+                                class="bg-sand/70 border border-gray-200 rounded-xl px-3 sm:px-1.5 py-1.5 flex flex-row sm:flex-col items-center justify-between sm:justify-center">
                                 <span
-                                    class="text-[9px] font-bold uppercase tracking-wide text-gray-500 mb-0.5">Rooms</span>
-                                <div class="flex items-center gap-1">
+                                    class="text-xs sm:text-[10px] font-bold uppercase tracking-wide text-gray-600 sm:mb-0.5">Rooms</span>
+                                <div class="flex items-center gap-2 lg:gap-1">
                                     <button type="button" onclick="updateCount('rooms', -1)" aria-label="Decrease rooms"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">−</button>
                                     <span id="roomCount"
-                                        class="w-4 text-center text-xs font-bold text-charcoal tabular-nums">1</span>
+                                        class="w-6 lg:w-4 text-center text-base lg:text-xs font-bold text-charcoal tabular-nums">1</span>
                                     <button type="button" onclick="updateCount('rooms', 1)" aria-label="Increase rooms"
-                                        class="w-5 h-5 rounded-md bg-white border border-gray-200 text-forest font-bold text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
+                                        class="w-10 h-10 sm:w-9 sm:h-9 lg:w-6 lg:h-6 rounded-lg bg-white border border-gray-200 text-forest font-bold text-base lg:text-xs flex items-center justify-center hover:bg-forest hover:text-white transition cursor-pointer">+</button>
                                 </div>
                             </div>
                         </div>
@@ -236,376 +143,54 @@
                             <span id="bookingCtaText">Book via WhatsApp</span>
                             <span>→</span>
                         </button>
+                        <p id="estimateNote" class="text-[11px] leading-snug text-gray-600 mt-1.5 px-0.5"></p>
                     </div>
+                    <p id="capacityWarning" role="status" class="hidden sm:col-span-2 lg:col-span-12 text-xs text-amber-900 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2"></p>
 
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= TRUST BAR ================= -->
-    <section class="bg-forest text-alabaster py-6 px-5 border-t border-white/10">
-        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs md:text-sm">
-            <div>
-                <p class="text-gold font-bold text-base md:text-lg">Zero Commission</p>
-                <p class="text-white/70">Direct Resort Best Tariff</p>
-            </div>
-            <div>
-                <p class="text-gold font-bold text-base md:text-lg">Free Breakfast</p>
-                <p class="text-white/70">Authentic Kerala & Continental</p>
-            </div>
-            <div>
-                <p class="text-gold font-bold text-base md:text-lg">Instant Confirmation</p>
-                <p class="text-white/70">Direct WhatsApp Concierge</p>
-            </div>
-            <div>
-                <p class="text-gold font-bold text-base md:text-lg">Flexible Reschedule</p>
-                <p class="text-white/70">Free date change up to 48 hrs</p>
-            </div>
-        </div>
-    </section>
+    <div id="trustBar" class="bg-forest text-alabaster py-6 px-5 border-t border-white/10 flex flex-wrap justify-center gap-x-10 gap-y-5 text-xs md:text-sm"></div>
 
-    <!-- ================= STAYS & TARIFFS ================= -->
     <section id="stays" class="py-20 px-5 md:px-12 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
             <div>
-                <span class="text-gold font-semibold text-xs uppercase tracking-widest">Sanctuaries & Tariffs</span>
+                <span class="text-bronze font-semibold text-xs uppercase tracking-widest">Sanctuaries & Tariffs</span>
                 <h2 class="font-serif text-4xl md:text-5xl font-semibold text-forest mt-2">Choose Your Stay</h2>
             </div>
-            <a href="rooms.html"
-                class="text-forest font-semibold text-sm underline underline-offset-4 hover:text-gold transition mt-3 md:mt-0">
-                Compare all rooms & amenities →
-            </a>
+            <a href="rooms.html" class="text-forest font-semibold text-sm underline underline-offset-4 hover:text-bronze transition mt-3 md:mt-0">Compare all rooms & amenities →</a>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-            <!-- Room Card 1 -->
-            <div
-                class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col reveal">
-                <div class="relative h-64 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=80"
-                        alt="Mist Valley Cottage"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    <span
-                        class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-forest text-xs font-bold px-3 py-1 rounded-full">
-                        Best Value
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-serif text-2xl font-semibold text-forest">Mist Valley Cottage</h3>
-                            <div class="text-right">
-                                <span class="text-xl font-bold text-charcoal tabular-nums">₹4,999</span>
-                                <span class="block text-[11px] text-gray-500">per night</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-                            Cozy teak-wood cottage with a private valley-facing balcony, rain shower, and morning mist
-                            views.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium text-gray-600">
-                            <span class="bg-sand px-2.5 py-1 rounded-md">420 sq.ft</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">King Bed</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">Valley Balcony</span>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100 flex gap-3">
-                        <button onclick="selectRoomAndScroll('4999')"
-                            class="flex-1 bg-forest hover:bg-forestLight text-white text-sm font-semibold py-2.5 rounded-xl transition cursor-pointer">
-                            Select & Book
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Room Card 2 -->
-            <div
-                class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col reveal">
-                <div class="relative h-64 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"
-                        alt="Forest Canopy Villa"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    <span class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-3 py-1 rounded-full">
-                        Most Popular • 2 Left
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-serif text-2xl font-semibold text-forest">Forest Canopy Villa</h3>
-                            <div class="text-right">
-                                <span class="text-xl font-bold text-charcoal tabular-nums">₹7,499</span>
-                                <span class="block text-[11px] text-gray-500">per night</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-                            Elevated glass-walled villa surrounded by 100-year-old trees, outdoor deck, and freestanding
-                            soaking tub.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium text-gray-600">
-                            <span class="bg-sand px-2.5 py-1 rounded-md">650 sq.ft</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">Forest Deck</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">Soaking Tub</span>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100 flex gap-3">
-                        <button onclick="selectRoomAndScroll('7499')"
-                            class="flex-1 bg-forest hover:bg-forestLight text-white text-sm font-semibold py-2.5 rounded-xl transition cursor-pointer">
-                            Select & Book
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Room Card 3 -->
-            <div
-                class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col reveal">
-                <div class="relative h-64 overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=80"
-                        alt="Private Plunge Pool Suite"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    <span class="absolute top-3 left-3 bg-forest text-white text-xs font-bold px-3 py-1 rounded-full">
-                        Honeymoon Pick
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-serif text-2xl font-semibold text-forest">Plunge Pool Suite</h3>
-                            <div class="text-right">
-                                <span class="text-xl font-bold text-charcoal tabular-nums">₹10,999</span>
-                                <span class="block text-[11px] text-gray-500">per night</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 text-sm mt-3 leading-relaxed">
-                            Ultra-private luxury sanctuary featuring a heated private infinity plunge pool, gazebo, and
-                            butler service.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium text-gray-600">
-                            <span class="bg-sand px-2.5 py-1 rounded-md">920 sq.ft</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">Private Pool</span>
-                            <span class="bg-sand px-2.5 py-1 rounded-md">Candlelight Setup</span>
-                        </div>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-100 flex gap-3">
-                        <button onclick="selectRoomAndScroll('10999')"
-                            class="flex-1 bg-forest hover:bg-forestLight text-white text-sm font-semibold py-2.5 rounded-xl transition cursor-pointer">
-                            Select & Book
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- View All Rooms CTA -->
-            <div class="mt-12 text-center reveal">
-                <div
-                    class="inline-flex flex-col sm:flex-row items-center gap-4 bg-sand/80 border border-gray-200/80 px-6 py-4 rounded-2xl">
-                    <p class="text-sm text-gray-700">
-                        Looking for family suites, treehouses, or group stays?
-                    </p>
-                    <a href="rooms.html"
-                        class="inline-flex items-center gap-2 bg-forest hover:bg-forestLight text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition shadow-sm">
-                        <span>Explore All 6 Stays & Rates</span>
-                        <span>→</span>
-                    </a>
-                </div>
-            </div>
-
+        <div id="stayCards" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        <div id="moreStays"></div>
     </section>
 
-    <!-- ================= THE VIBE / STORY SECTION ================= -->
     <section id="story" class="py-20 px-5 md:px-12 bg-sand/60">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <span class="text-gold font-semibold text-xs uppercase tracking-widest">Slow Living in Wayanad</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-semibold text-forest mt-2 leading-tight">
-                    Designed for Unhurried Mornings & Quiet Nights
-                </h2>
-                <p class="text-gray-600 mt-5 leading-relaxed">
-                    Set across 14 acres of private cardamom and coffee estates, Vana Mist blends traditional Kerala
-                    timber architecture with modern barefoot luxury. Wake up to birdsong, swim above the clouds, and
-                    dine on farm-fresh Malabar cuisine.
-                </p>
-                <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-gray-300/60">
-                    <div>
-                        <p class="font-serif text-3xl font-bold text-forest">14 Acres</p>
-                        <p class="text-xs text-gray-500 mt-1">Private Estate</p>
-                    </div>
-                    <div>
-                        <p class="font-serif text-3xl font-bold text-forest">12 Villas</p>
-                        <p class="text-xs text-gray-500 mt-1">Low-Density Privacy</p>
-                    </div>
-                    <div>
-                        <p class="font-serif text-3xl font-bold text-forest">4.9 ★</p>
-                        <p class="text-xs text-gray-500 mt-1">480+ Google Reviews</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative reveal">
-                <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1000&q=80"
-                    alt="Resort Deck View"
-                    class="w-full h-[460px] object-cover rounded-t-full rounded-b-3xl shadow-xl" />
-            </div>
-        </div>
+        <div id="storyContent" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"></div>
     </section>
 
-    <!-- ================= CURATED EXPERIENCES ================= -->
     <section id="experiences" class="py-20 px-5 md:px-12 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 reveal">
-            <div>
-                <span class="text-gold font-semibold text-xs uppercase tracking-widest">Curated Moments</span>
-                <h2 class="font-serif text-4xl md:text-5xl font-semibold text-forest mt-2">Beyond the Stay</h2>
-            </div>
-            <a href="gallery.html"
-                class="text-forest font-semibold text-sm underline underline-offset-4 hover:text-gold transition mt-3 md:mt-0">
-                Explore full photo gallery →
-            </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="relative h-80 rounded-2xl overflow-hidden group reveal">
-                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=700&q=80"
-                    alt="Ayurveda Spa"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end text-white">
-                    <h3 class="font-serif text-2xl font-semibold">Ayurveda Spa</h3>
-                    <p class="text-xs text-white/80 mt-1">Traditional Abhyangam & herbal steam therapies.</p>
-                </div>
-            </div>
-
-            <div class="relative h-80 rounded-2xl overflow-hidden group reveal">
-                <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=700&q=80"
-                    alt="Estate Trek"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end text-white">
-                    <h3 class="font-serif text-2xl font-semibold">Sunrise Ridge Trek</h3>
-                    <p class="text-xs text-white/80 mt-1">Guided morning trail through misty tea slopes.</p>
-                </div>
-            </div>
-
-            <div class="relative h-80 rounded-2xl overflow-hidden group reveal">
-                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=80"
-                    alt="Candlelight Dinner"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end text-white">
-                    <h3 class="font-serif text-2xl font-semibold">Gazebo Dining</h3>
-                    <p class="text-xs text-white/80 mt-1">Private 4-course Malabar dinner under the stars.</p>
-                </div>
-            </div>
-
-            <div class="relative h-80 rounded-2xl overflow-hidden group reveal">
-                <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?auto=format&fit=crop&w=700&q=80"
-                    alt="Bonfire Night"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex flex-col justify-end text-white">
-                    <h3 class="font-serif text-2xl font-semibold">Mist Bonfire</h3>
-                    <p class="text-xs text-white/80 mt-1">Evening acoustic music & freshly roasted coffee.</p>
-                </div>
-            </div>
-        </div>
+        <div id="experiencesContent"></div>
     </section>
+    </main>
 
-    <!-- ================= LOCATION & FOOTER ================= -->
-    <footer id="location" class="bg-forest text-alabaster pt-16 pb-24 md:pb-12 px-5 md:px-12">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/15">
-            <div>
-                <h3 data-brand-name class="font-serif text-3xl font-semibold">Vana Mist Resort</h3>
-                <p data-address class="text-white/70 text-sm mt-3 leading-relaxed">
-                    Meppadi - Chooralmala Road, Vythiri Taluk, Wayanad, Kerala 673577
-                </p>
-                <p class="text-gold text-sm font-medium mt-4">Check-in: 2:00 PM • Check-out: 11:00 AM</p>
-            </div>
-
-            <div>
-                <h4 class="font-semibold text-sm uppercase tracking-wider text-gold mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-sm text-white/80">
-                    <li><a href="rooms.html" class="hover:text-gold transition">Rooms & Direct Tariffs</a></li>
-                    <li><a href="gallery.html" class="hover:text-gold transition">Photo Gallery</a></li>
-                    <li><a href="contact.html" class="hover:text-gold transition">Honeymoon & Family Packages</a></li>
-                    <li><a href="contact.html" class="hover:text-gold transition">Route Map & Contact</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold text-sm uppercase tracking-wider text-gold mb-4">Direct Reservations</h4>
-                <p class="text-sm text-white/80">Phone / WhatsApp: <span data-phone>+91 98765 43210</span></p>
-                <p class="text-sm text-white/80 mt-1">Email: <span data-email>stay@vanamistwayanad.com</span></p>
-                <button onclick="openGeneralWhatsApp()"
-                    class="mt-5 bg-gold hover:bg-goldHover text-white text-sm font-semibold px-6 py-3 rounded-xl transition cursor-pointer">
-                    Chat with Reservations
-                </button>
-            </div>
-        </div>
-
-        <div
-            class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-white/50 gap-3">
-            <p>© 2026 <span data-brand-name>Vana Mist Resort</span>. All rights reserved.</p>
-            <p>Direct Booking Engine • Zero Commission</p>
-        </div>
-    </footer>
-
-    <!-- ================= MOBILE STICKY BOTTOM RATE BAR ================= -->
-    <div
-        class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200 px-4 py-3 flex items-center justify-between shadow-lg">
+    <!-- MOBILE STICKY RATE BAR -->
+    <div data-sticky-bar class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-200 px-4 py-3 flex items-center justify-between shadow-lg">
         <div>
             <span class="text-[11px] text-gray-500 block">Direct Tariff</span>
-            <span class="text-base font-bold text-forest tabular-nums">From <span data-starting-price>₹4,999</span>
-                <span class="text-xs font-normal text-gray-500">/ night</span></span>
+            <span class="text-base font-bold text-forest tabular-nums">From <span data-starting-price></span> <span class="text-xs font-normal text-gray-500">/ night</span></span>
         </div>
-        <a href="#booking-dock" class="bg-gold text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow">
-            Check Dates
-        </a>
+        <a href="#booking-dock" class="bg-bronze text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow">Check Dates</a>
     </div>
 
+    <div id="site-footer"></div>
+    <div id="site-floating"></div>
 
-    <!-- ================= FLOATING MAP & WHATSAPP BUTTONS ================= -->
-    <div class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-50 flex flex-col gap-3">
-
-        <!-- Google Maps Direction Button -->
-        <a id="floatingMapBtn" href="https://maps.google.com/?q=Wayanad,Kerala" target="_blank"
-            rel="noopener noreferrer" aria-label="Open Resort Location on Google Maps"
-            class="group relative w-12 h-12 rounded-full bg-forest text-white shadow-2xl border-2 border-gold/60 flex items-center justify-center hover:bg-forestLight hover:scale-110 transition-all duration-300">
-            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
-            </svg>
-            <span
-                class="hidden md:block absolute right-14 bg-charcoal text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow">
-                View Route Map
-            </span>
-        </a>
-
-        <!-- Direct WhatsApp Chat Button (100% Reliable Direct Link) -->
-        <a id="floatingWhatsappBtn"
-            href="https://wa.me/918606411892?text=Hi%20Vana%20Mist%20Resort!%20I%20have%20a%20query." target="_blank"
-            rel="noopener noreferrer" aria-label="Chat on WhatsApp"
-            class="group relative w-12 h-12 rounded-full bg-[#25D366] text-white shadow-xl flex items-center justify-center hover:scale-110 transition-all duration-300">
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path
-                    d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.49 0 .16 5.32.16 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.33-1.66a11.87 11.87 0 005.74 1.46h.01c6.58 0 11.92-5.33 11.92-11.9a11.83 11.83 0 00-3.48-8.42zM12.08 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.76.98 1-3.66-.24-.38a9.86 9.86 0 01-1.51-5.25c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.9 7c0 5.45-4.44 9.9-9.88 9.9zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z" />
-            </svg>
-            <span
-                class="hidden md:block absolute right-14 bg-charcoal text-white text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none shadow">
-                Chat on WhatsApp
-            </span>
-        </a>
-
-    </div>
-
-    <!-- Config & Main Script -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/pricing.js"></script>
     <script src="js/script.js"></script>
-
-
 </body>
 
 </html>

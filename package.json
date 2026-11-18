@@ -1,0 +1,13 @@
+{
+  "name": "demo-resort-website",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "check": "node scripts/check.js",
+    "build": "node scripts/build.js",
+    "test": "node tests/pricing.test.js && node tests/templates.test.js && node tests/build.test.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
